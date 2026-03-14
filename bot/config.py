@@ -12,6 +12,7 @@ ALLOWED_USER_IDS: set[int] = {int(i.strip()) for i in _raw_ids.split(",") if i.s
 
 CATEGORIES: dict[str, str] = {
     "food": "🍕 Еда",
+    "eating_out": "🍽 Еда вне дома",
     "transport": "🚗 Транспорт",
     "shopping": "🛍 Покупки",
     "entertainment": "🎬 Развлечения",

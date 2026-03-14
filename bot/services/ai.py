@@ -11,13 +11,14 @@ PARSE_SYSTEM_PROMPT = """You are a finance assistant. Extract expense data from 
 
 Return a JSON object with exactly these fields:
 - "amount": a positive number (required)
-- "category": one of: food, transport, shopping, entertainment, health, other
+- "category": one of: food, eating_out, transport, shopping, entertainment, health, other
 - "description": short description string, or null
 
 If you cannot find a clear amount, return: {"error": "no_amount"}
 
 Examples:
-  "spent 500 on lunch at cafe" → {"amount": 500, "category": "food", "description": "lunch at cafe"}
+  "spent 500 on lunch at cafe" → {"amount": 500, "category": "eating_out", "description": "lunch at cafe"}
+  "bought groceries 1200" → {"amount": 1200, "category": "food", "description": "groceries"}
   "metro ticket 60 rubles" → {"amount": 60, "category": "transport", "description": "metro ticket"}
   "bought shoes 3500" → {"amount": 3500, "category": "shopping", "description": "shoes"}
   "just talking" → {"error": "no_amount"}
