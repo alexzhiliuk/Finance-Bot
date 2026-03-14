@@ -1,0 +1,11 @@
+[project]
+name = "finance-bot"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.11"
+dependencies = [
+    "aiogram==3.15.0",
+    "aiosqlite==0.20.0",
+    "openai==1.65.0",
+    "python-dotenv==1.0.1",
+]
