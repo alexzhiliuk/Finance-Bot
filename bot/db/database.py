@@ -52,6 +52,25 @@ async def get_monthly_expenses(user_id: int, year: int, month: int) -> list[dict
         return [dict(r) for r in rows]
 
 
+async def get_daily_expenses(user_id: int, year: int, month: int, day: int) -> list[dict]:
+    async with aiosqlite.connect(DB_PATH) as db:
+        db.row_factory = aiosqlite.Row
+        cursor = await db.execute(
+            """
+            SELECT id, amount, category, description, created_at
+            FROM expenses
+            WHERE user_id = ?
+              AND strftime('%Y', created_at) = ?
+              AND strftime('%m', created_at) = ?
+              AND strftime('%d', created_at) = ?
+            ORDER BY created_at DESC
+            """,
+            (user_id, str(year), f"{month:02d}", f"{day:02d}"),
+        )
+        rows = await cursor.fetchall()
+        return [dict(r) for r in rows]
+
+
 async def get_recent_expenses(user_id: int, limit: int = 10) -> list[dict]:
     async with aiosqlite.connect(DB_PATH) as db:
         db.row_factory = aiosqlite.Row
